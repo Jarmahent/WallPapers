@@ -23,7 +23,6 @@ def id_gen(size=9, chars=string.ascii_uppercase + string.digits):  #Create rando
 while True:
 
 
-    ass = 'ass and titties'
     submissions = r.get_subreddit('pics').get_random_submission()
     url = urllib.parse.unquote(submissions.url)
     jpg = 'jpg'

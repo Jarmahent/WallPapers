@@ -9,9 +9,8 @@ import ctypes
 
 
 
-print('Loging in')
+print('Logging in')
 r = praw.Reddit(Obot.app_id)
-
 im = pyimgur.Imgur(Obot.client_id, Obot.client_secret)
 
 def id_gen(size=9, chars=string.ascii_uppercase + string.digits):  #Create random ID

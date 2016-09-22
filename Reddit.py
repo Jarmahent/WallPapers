@@ -21,15 +21,18 @@ def id_gen(size=9, chars=string.ascii_uppercase + string.digits):  #Create rando
 
 while True:
 
-
-    submissions = r.get_subreddit('pics').get_random_submission()
+    sub = 'HighRes'
+    submissions = r.get_subreddit(sub).get_random_submission()
+    print('Submission Found in ' + sub)
     url = urllib.parse.unquote(submissions.url)
     jpg = 'jpg'
     imgur = 'imgur'
     if jpg in url and imgur in url:
         newurl = url.split('/')[-1].split('.')[0]
+        print('Downlading Image')
         im.get_image(newurl).download(path="C:\\Users\\KEVIN\\Pictures\\PyImgur", name=id_gen(), overwrite=False, size=None)
-        time.sleep(30)
+
+
 
 
 

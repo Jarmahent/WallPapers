@@ -25,14 +25,14 @@ while True:
 
     submissions = r.get_subreddit('pics').get_random_submission()
     url = urllib.parse.unquote(submissions.url)
-    reddit = 'i.reddit'
+    reddit = 'i.reddi'
     jpg = 'jpg'
     imgur = 'imgur'
     if jpg in url and imgur in url:
         newurl = url.split('/')[-1].split('.')[0]
         im.get_image(newurl).download(path="C:\\Users\\KEVIN\\Pictures\\PyImgur", name=id_gen(), overwrite=False, size=None)
         time.sleep(30)
-    
+
 
 
 

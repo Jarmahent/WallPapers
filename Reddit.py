@@ -1,11 +1,13 @@
 import praw
 import Obot
-import time
 import pyimgur
 import urllib.parse
 import string
 import random
-import urllib
+import time
+from urllib import request
+
+
 
 
 
@@ -25,13 +27,21 @@ while True:
     submissions = r.get_subreddit(sub).get_random_submission()
     print('Submission Found in ' + sub)
     url = urllib.parse.unquote(submissions.url)
-    reddit = 'i.reddi'
+    reddit = 'reddit'
     jpg = 'jpg'
     imgur = 'imgur'
     if jpg in url and imgur in url:
         newurl = url.split('/')[-1].split('.')[0]
         print('Downlading Image')
         im.get_image(newurl).download(path="C:\\Users\\KEVIN\\Pictures\\PyImgur", name=id_gen(), overwrite=False, size=None)
+        time.sleep(30)
+
+
+        #Space
+    if reddit in url:
+        request.urlretrieve(url, "C:\\Users\\KEVIN\\Pictures\\PyImgur")
+        time.sleep(30)
+
 
 
 

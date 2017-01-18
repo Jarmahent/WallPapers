@@ -66,7 +66,7 @@ while True:
         print("Downloaded remade url")
 
     if jpg in url and imgur in url:
-#ass ass ass ass
+
 
         newurl = url.split('/')[-1].split('.')[0]
         imgur_name = id_gen()

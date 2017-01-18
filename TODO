@@ -1,0 +1,6 @@
+add textwindow or something similar
+take the url subrtact /a/ and /gallery/
+add new .jpg url to primary download flow
+add duplicate handling with sqlite tables
+throw away galleries and albums
+using sqlite tables add unique characters

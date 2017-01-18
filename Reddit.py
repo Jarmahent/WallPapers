@@ -7,7 +7,6 @@ import random
 import time
 from urllib import request
 from PIL import Image
-import os
 import sqlite3
 
 keyWords = ['gallery', '/a/']
@@ -51,6 +50,7 @@ while True:
 
 
     submissions = r.get_subreddit(sub).get_random_submission()
+
     print('Submission Found in ' + sub)
     print("Submission.url: ", submissions.url)
 
@@ -66,7 +66,7 @@ while True:
         print("Downloaded remade url")
 
     if jpg in url and imgur in url:
-
+#ass ass ass ass
 
         newurl = url.split('/')[-1].split('.')[0]
         imgur_name = id_gen()
@@ -85,7 +85,7 @@ while True:
     if not reddit in url and not redd in url and not imgur in url and jpg in url:
         print("Not reddit or imgur but I can download the image")
         randomGen = id_gen()
-        request.urlretrieve(url, "C:\\Users\\KEVIN\\Pictures\\temp_pics\\" + randomGen)
+        request.urlretrieve(url, "C:\\Users\\KEVIN\\Pictures\\temp_pics\\" + randomGen + ".jpg")
         print("Downloaded", "This image ID is: ", randomGen)
 
 

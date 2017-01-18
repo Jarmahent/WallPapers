@@ -3,13 +3,14 @@ import Obot
 import pyimgur
 import urllib.parse
 import string
-import webbrowser
 import random
 import time
 from urllib import request
 from PIL import Image
-import os, glob
+import os
+import sqlite3
 
+keyWords = ['gallery', '/a/']
 
 
 class get_image(object):
@@ -24,11 +25,15 @@ class get_image(object):
         height = im.size[1]
         return height
 
+sub = 'pics'
+redd = "redd"
+reddit = 'reddit'
+jpg = 'jpg'
+imgur = 'imgur'
 
 
-
-
-
+db = sqlite3.connect("imagedb")
+cursor = db.cursor()
 
 
 
@@ -44,14 +49,21 @@ def id_gen(size=9, chars=string.ascii_uppercase + string.digits):  #Create rando
 
 while True:
 
-    sub = 'pics'
+
     submissions = r.get_subreddit(sub).get_random_submission()
     print('Submission Found in ' + sub)
+    print("Submission.url: ", submissions.url)
 
     url = urllib.parse.unquote(submissions.url)
-    reddit = 'reddit'
-    jpg = 'jpg'
-    imgur = 'imgur'
+    #if url doesnt have jpg and doesnt have "gallery" or "/a/"
+    if(not jpg in url and imgur in url and not "gallery" in url and not "/a/" in url):
+        print("Url without jpg format: ", url)
+        jpgURL = submissions.url + ".jpg"
+        print("Remade url is: ", jpgURL)
+        imgur_name2 = id_gen()
+        newurl2 = jpgURL.split('/')[-1].split('.')[0]
+        im.get_image(newurl2).download(path="C:\\Users\\KEVIN\\Pictures\\temp_pics", name=imgur_name2, overwrite=False, size=None)
+        print("Downloaded remade url")
 
     if jpg in url and imgur in url:
 
@@ -59,20 +71,10 @@ while True:
         newurl = url.split('/')[-1].split('.')[0]
         imgur_name = id_gen()
         temp_pic = imgur_name + ".jpg"
-        print( "\n" + 'Downloading Image through Imgur')
+        print( "\n" + 'Downloading Image through Imgur', "\n")
         im.get_image(newurl).download(path="C:\\Users\\KEVIN\\Pictures\\temp_pics", name=imgur_name, overwrite=False, size=None)
 
-        if(get_image.width("C:\\Users\\KEVIN\\Pictures\\temp_pics\\" + temp_pic) < 3000):
-            print("Image is not 4K" + "\n")
-            print("Image resolution is: " + str(get_image.width("C:\\Users\\KEVIN\\Pictures\\temp_pics\\" + temp_pic)) + "x" + str(get_image.height("C:\\Users\\KEVIN\\Pictures\\temp_pics\\" + temp_pic)))
-            print("Removing Image" + "\n")
 
-            os.remove("C:\\Users\\KEVIN\\Pictures\\temp_pics\\" + temp_pic)
-
-
-        elif(get_image.width("C:\\Users\\KEVIN\\Pictures\\temp_pics\\" + reddit_pic) >= 3000):
-            print("Moving Image to /Pyimgur/")
-            os.rename("C:\\Users\\KEVIN\\Pictures\\temp_pics\\" + reddit_pic, "C:\\Users\\KEVIN\\Pictures\\Pyimgur\\" + reddit_pic + "\n")
 
     if reddit in url:
         reddit_gen = id_gen()
@@ -80,17 +82,14 @@ while True:
         print("\n" + "Downloading through I.Reddit")
         request.urlretrieve(url, "C:\\Users\\KEVIN\\Pictures\\temp_pics\\" + reddit_pic)
 
+    if not reddit in url and not redd in url and not imgur in url and jpg in url:
+        print("Not reddit or imgur but I can download the image")
+        randomGen = id_gen()
+        request.urlretrieve(url, "C:\\Users\\KEVIN\\Pictures\\temp_pics\\" + randomGen)
+        print("Downloaded", "This image ID is: ", randomGen)
 
-        if(get_image.width("C:\\Users\\KEVIN\\Pictures\\temp_pics\\" + reddit_pic) < 3000):
-            print("Image is not 4K" + "\n")
-            print("Image resolution is: " + str(get_image.width("C:\\Users\\KEVIN\\Pictures\\temp_pics\\" + reddit_pic)) + "x" + str(get_image.height("C:\\Users\\KEVIN\\Pictures\\temp_pics\\" + reddit_pic)))
-            print('Removing Image' + "\n")
-            os.remove("C:\\Users\\KEVIN\\Pictures\\temp_pics\\" + reddit_pic)
 
 
-        elif(get_image.width("C:\\Users\\KEVIN\\Pictures\\temp_pics\\" + reddit_pic) >= 3000):
-            print("Moving Image to /Pyimgur/")
-            os.rename("C:\\Users\\KEVIN\\Pictures\\temp_pics\\" + reddit_pic, "C:\\Users\\KEVIN\\Pictures\\Pyimgur\\" + reddit_pic)
 
 
 

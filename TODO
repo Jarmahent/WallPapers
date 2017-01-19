@@ -4,3 +4,12 @@ add new .jpg url to primary download flow
 add duplicate handling with sqlite tables
 throw away galleries and albums
 using sqlite tables add unique characters
+if using praw4.4 wont be able to access reddit api
+
+
+
+
+
+
+
+implement machine learning????????????

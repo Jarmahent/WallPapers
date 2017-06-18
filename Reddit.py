@@ -47,14 +47,14 @@ while True:
         print("Remade url is: ", jpgURL)
         print("Its not in here!")
         imgur_name2 = id_gen()
-        ImageDbIn = open("imagedb.txt", "r")
+        ImageDbIn = open("imagedb.txt").read()
         if(jpgURL in ImageDbIn):
             print("URL has already been downloaded, restarting.")
             break
         else:
             print("Appending url to DB")
             ImageDbOut = open("imagedb.txt", "a")
-            ImageDbOut.write(jpgURL)
+            ImageDbOut.write(jpgURL + "\n")
             newurl2 = jpgURL.split('/')[-1].split('.')[0]
             im.get_image(newurl2).download(path="C:\\Users\\KEVIN\\Pictures\\pics", name=imgur_name2, overwrite=False, size=None)
             print("Downloaded remade url")
@@ -68,14 +68,14 @@ while True:
         print("New URL detected, storing.")
         temp_pic = imgur_name + ".jpg"
         print("\n" + 'Downloading Image through Imgur', "\n")
-        ImageDbIn = open("imagedb.txt", "r")
+        ImageDbIn = open("imagedb.txt").read()
         if(newurl in ImageDbIn):
             print("URL has already been downloaded, restarting.")
             break
         else:
             print("Appending url to DB")
             ImageDbOut = open("imagedb.txt", "a")
-            ImageDbOut.write(newurl)
+            ImageDbOut.write(newurl + "\n")
             im.get_image(newurl).download(path="C:\\Users\\KEVIN\\Pictures\\pics", name=imgur_name,
                                           overwrite=False,
                                           size=None)
@@ -86,33 +86,33 @@ while True:
         print("\n" + "Downloading through I.Reddit")
         print("New URL detected, storing.")
 
-        ImageDbIn = open("imagedb.txt", "r")
+        ImageDbIn = open("imagedb.txt").read()
         if(ImageDbIn in url):
             print("URL has already been downloaded, restarting.")
             break
         else:
             print("Appending url to DB")
             ImageDbOut = open("imagedb.txt", "a")
-            ImageDbOut.write(url)
+            ImageDbOut.write(url + "\n")
             request.urlretrieve(url, "C:\\Users\\KEVIN\\Pictures\\pics\\" + reddit_pic)
 
     if not reddit in url and not redd in url and not imgur in url and jpg in url:
         print("Not reddit or imgur but I can download the image")
         randomGen = id_gen()
         print("New URL detected, storing.")
-        ImageDbIn = open("imagedb.txt", "r")
+        ImageDbIn = open("imagedb.txt").read()
         if(url in ImageDbIn):
             print("URL has already been downloaded, restarting.")
             break
         else:
             print("Appending url to DB")
             ImageDbOut = open("imagedb.txt", "a")
-            ImageDbOut.write(url)
+            ImageDbOut.write(url + "\n")
             request.urlretrieve(url, "C:\\Users\\KEVIN\\Pictures\\pics\\" + randomGen + ".jpg")
             print("Downloaded", "This image ID is: ", randomGen)
 
-    print("Waiting 10 seconds")
+    print("Waiting 30 seconds")
     x = 0
-    for x in range(10):
+    for x in range(30):
         print(x + 1)
         time.sleep(1)

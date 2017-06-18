@@ -79,7 +79,7 @@ while True:
             im.get_image(newurl).download(path="C:\\Users\\KEVIN\\Pictures\\pics", name=imgur_name,
                                           overwrite=False,
                                           size=None)
-
+    #Download I.reddit url
     if reddit in url:
         reddit_gen = id_gen()
         reddit_pic = reddit_gen + ".jpg"
@@ -95,7 +95,7 @@ while True:
             ImageDbOut = open("imagedb.txt", "a")
             ImageDbOut.write(url + "\n")
             request.urlretrieve(url, "C:\\Users\\KEVIN\\Pictures\\pics\\" + reddit_pic)
-
+    #Download URL that is not reddit or imgur but has jpg extenstion
     if not reddit in url and not redd in url and not imgur in url and jpg in url:
         print("Not reddit or imgur but I can download the image")
         randomGen = id_gen()
@@ -110,7 +110,7 @@ while True:
             ImageDbOut.write(url + "\n")
             request.urlretrieve(url, "C:\\Users\\KEVIN\\Pictures\\pics\\" + randomGen + ".jpg")
             print("Downloaded", "This image ID is: ", randomGen)
-
+    #Wait 30 sec
     print("Waiting 30 seconds")
     x = 0
     for x in range(30):
